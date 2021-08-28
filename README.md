@@ -42,6 +42,6 @@
 
 1. `main.py` - 主文件：承担与用户的交互和与其他组件的调用
 2. `infoCollection.py` - 信息搜集：实现信息搜集
-3. `tools.py` - 实用工具：在控制台打印红色等
+3. `tools.py` - 实用工具：在控制台打印红色字体等
 
 [1]: (https://xiaix.me/duan-kou-sao-miao-yuan-li-ji-shi-xian/) "端口扫描原理及实现"
