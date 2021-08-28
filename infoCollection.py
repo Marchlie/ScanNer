@@ -10,7 +10,7 @@ def portscan(targetIp, targetPort, localIp, localPort, scanMode):
 
 
 def fullTCPScan(targetIp, targetPort, localIp, localPort):
-    # TCP 全连接扫描
+    # TCP 连接扫描
     tcp_connect_scan = sr1(IP(dst=targetIp) / TCP(sport=localIp,
                                                   dport=targetIp, flags='S'), timeout=10)
 
