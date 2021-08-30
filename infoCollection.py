@@ -1,11 +1,10 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
-# from scapy.layers.inet import ICMP, IP, TCP
-# from scapy.sendrecv import sr1, send
-# from scapy.volatile import RandShort
+from scapy.layers.inet import ICMP, IP, TCP
+from scapy.sendrecv import sr1, send
+from scapy.volatile import RandShort
 from tools import *
-from scapy.all import *
 
 def portscan(targetIp, targetPort, localIp, localPort, scanMode):
     if scanMode == "fullTCPScan":
