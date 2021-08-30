@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
 def printGreen(a):
     # 打印绿色
     print('\033[32m%s\033[0m' % a)
