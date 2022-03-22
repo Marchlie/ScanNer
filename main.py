@@ -4,7 +4,7 @@ from infoCollection import portscan
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-l", help="Local IP", type=str,)
+    parser.add_argument("-l", help="Local IP", type=str)
     parser.add_argument("-lp", help="Local port", type=int)
     parser.add_argument("t", help="Target IP", type=str)
     parser.add_argument("-tp", help="Target port", type=int)
@@ -17,7 +17,7 @@ def main():
     localPort = args.lp
     scanMode = args.sm
 
-    portscan(targetIP, targetPort, localIP, localPort, scanMode)
+    portscan(targetIP, targetPort, localIP, localPort, scanMode)  # 端口扫描
 
 
 if __name__ == "__main__":
