@@ -7,7 +7,6 @@ Information Collection
 
 from scapy.layers.inet import ICMP, IP, TCP
 from scapy.sendrecv import sr1, send
-from scapy.volatile import RandShort
 from tools import *
 
 
@@ -53,6 +52,10 @@ def ping(targetIP, localPort):
     else:
         printGreen("[+] targetIP is open")
         print(icmp.answers)
+
+
+def alive():
+    return
 
 
 if __name__ == "__main__":
