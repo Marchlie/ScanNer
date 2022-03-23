@@ -1,5 +1,60 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
+class log:
+    import time
+
+    def info(self, msg):
+        print(msg)
+        with open(
+            "log"
+            + self.time.strftime("%Y-%m-%d", self.time.localtime(self.time.time()))
+            + ".txt",
+            "a",
+        ) as f:
+            f.write(
+                "info"
+                + self.time.strftime(
+                    "%Y-%m-%d %H:%M:%S", self.time.localtime(self.time.time())
+                )
+                + " "
+                + msg
+                + "\n"
+            )
+
+    def warning(self, msg):
+        print(msg)
+        with open(
+            "log"
+            + self.time.strftime("%Y-%m-%d", self.time.localtime(self.time.time()))
+            + ".txt",
+            "a",
+        ) as f:
+            f.write(
+                "warning"
+                + self.time.strftime(
+                    "%Y-%m-%d %H:%M:%S", self.time.localtime(self.time.time())
+                )
+                + " "
+                + msg
+                + "\n"
+            )
+    def debug(self, msg):
+        print(msg)
+        with open(
+            "log"
+            + self.time.strftime("%Y-%m-%d", self.time.localtime(self.time.time()))
+            + ".txt",
+            "a",
+        ) as f:
+            f.write(
+                "debug"
+                + self.time.strftime(
+                    "%Y-%m-%d %H:%M:%S", self.time.localtime(self.time.time())
+                )
+                + " "
+                + msg
+                + "\n"
+            )
 
 
 def printGreen(a):
