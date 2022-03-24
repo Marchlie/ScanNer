@@ -1,61 +1,52 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 """
-Information Collection
+Alive Test
+
+Alive test is made for test if the target is alive.
+It will send ICMP packet to target and test if the target is alive.
+Return bool if the target is alive or not.
 """
 
 
-from scapy.layers.inet import ICMP, IP, TCP
-from scapy.sendrecv import sr1, send
+from scapy.layers.inet import ICMP, IP, TCP, sr1
 from tools import *
 
 
-def portscan(targetIP, targetPort, localIP, localPort, scanMode):
-    if scanMode == "fullTCPScan":
-        fullTCPScan(targetIP, targetPort, localIP, localPort)
-    elif scanMode == "ping":
-        ping(targetIP, localPort)
-    else:
-        printRed("Nothing to do")
-
-
-def fullTCPScan(targetIP, targetPort, localIP, localPort):
-    # TCP 连接扫描
-    tcpConnectScan = sr1(
-        IP(dst=targetIP) / TCP(sport=localIP, dport=targetIP, flags="S"), timeout=10
-    )
-
-    # 判断是否收到应答包
-    if type(tcpConnectScan) == type(None):
-        printRed("[-] Port is closed.")
-    # 判断收到的应答包是否具有TCP层
-    elif tcpConnectScan.haslayer(TCP):
-        # 判断是否为SYN+ACK数据包
-        if tcpConnectScan.getlayer(TCP).flags == 0x12:
-            send(IP(dst=targetIP) / TCP(sport=localPort, dport=targetPort, flags="AR"))
-            printGreen("[+] Port is open.")
-        # 判断是否为RST数据包
-        elif tcpConnectScan.getlayer(TCP).flags == 0x14:
-            printRed("[-] Port is closed.")
-
-
-def ping(targetIP, localPort):
+def aliveTest(scanInfo) -> bool:
     """
-    Ping test
-
-    request targetIP
+    Alive Test
     """
-    icmp = IP(dst=targetIP) / ICMP()
-
-    if type(icmp) == type(None):
-        printRed("[-] targetIP might closed or be filtered")
-    else:
-        printGreen("[+] targetIP is open")
-        print(icmp.answers)
-
-
-def alive():
-    return
+    # Set target IP
+    targetIP = scanInfo["targetIP"]
+    # Set target port
+    targetPort = scanInfo["targetPort"]
+    # Set debug mode
+    isDebug = scanInfo["isDebug"]
+    # Set timeout
+    timeout = 3
+    # Set alive
+    alive = False
+    # Set ICMP packet
+    packet = IP(dst=targetIP) / ICMP()
+    # Send ICMP packet
+    response = sr1(packet, timeout=timeout, verbose=isDebug)
+    # If response is not None
+    if response is not None:
+        # Set alive
+        alive = True
+    # If targetPort is not None
+    if targetPort is not None:
+        # Set packet
+        packet = IP(dst=targetIP) / TCP(dport=targetPort)
+        # Send packet
+        response = sr1(packet, timeout=timeout, verbose=isDebug)
+        # If response is not None
+        if response is not None:
+            # Set alive
+            alive = True
+    # Return alive
+    return alive
 
 
 if __name__ == "__main__":
