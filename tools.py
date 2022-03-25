@@ -1,5 +1,11 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
+
+"""
+Tools for main program
+"""
+
+
 class log:
     import time
 
@@ -38,6 +44,7 @@ class log:
                 + msg
                 + "\n"
             )
+
     def debug(self, msg):
         print(msg)
         with open(
